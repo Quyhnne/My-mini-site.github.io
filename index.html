@@ -50,3 +50,16 @@
 
 </body>
 </html>
+.overlap {
+    position: absolute; /* This lets it float over the banner */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* This perfectly centers it */
+    color: white; /* Make the text white so it stands out against the image */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* This makes the text readable if the image is bright */
+}
+
+.banner {
+    position: relative; /* This acts as the "container" for the overlap */
+    height: 400px; /* Gives you plenty of room for text */
+}
