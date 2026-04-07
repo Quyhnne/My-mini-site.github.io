@@ -8,6 +8,7 @@
             margin: 0; display: flex; justify-content: center;
             align-items: center; height: 100vh;
             background: #2c3e50; font-family: 'Georgia', serif;
+            overflow: hidden;
         }
 
         .book {
@@ -15,32 +16,41 @@
             perspective: 1500px;
         }
 
-        /* THE PAGE ANIMATION */
         .page {
             position: absolute; width: 100%; height: 100%;
-            padding: 25px; box-sizing: border-box;
+            padding: 30px; box-sizing: border-box;
             background: #fdf6e3; border: 1px solid #d4a373;
             box-shadow: inset 0 0 40px rgba(0,0,0,0.1), 0 10px 20px rgba(0,0,0,0.4);
             transform-origin: left;
-            transition: transform 1s ease-in-out;
+            transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
             cursor: pointer;
-            backface-visibility: hidden;
+            backface-visibility: hidden; /* Hides the "back" of the page until flipped */
+            user-select: none;
         }
 
-        /* Hover to flip a page */
-        .page:hover { transform: rotateY(-160deg); }
+        /* This is the magic class that JavaScript will toggle */
+        .page.flipped {
+            transform: rotateY(-160deg);
+        }
 
+        /* Stacking order */
         .p1 { z-index: 3; }
         .p2 { z-index: 2; }
-        .p3 { z-index: 1; background: #eee; } /* The back cover */
+        .p3 { z-index: 1; cursor: default; } /* Back cover doesn't flip */
 
-        h2 { color: #5d4037; border-bottom: 1px solid #d4a373; margin-top: 0; }
-        p { color: #3e2723; line-height: 1.6; font-size: 0.95rem; }
+        h2 { color: #5d4037; border-bottom: 1px solid #d4a373; margin-top: 0; pointer-events: none; }
+        p { color: #3e2723; line-height: 1.6; font-size: 0.95rem; pointer-events: none; }
 
         .back-btn {
             position: fixed; top: 20px; left: 20px;
             padding: 10px 20px; background: white;
             color: #333; text-decoration: none; border-radius: 5px;
+            z-index: 1001;
+        }
+        
+        .hint {
+            position: absolute; bottom: 20px; color: rgba(0,0,0,0.3);
+            font-size: 0.8rem; width: 100%; text-align: center;
         }
     </style>
 </head>
@@ -51,22 +61,31 @@
     <div class="book">
         <div class="page p3">
             <h2>The End</h2>
-            <p>More stories coming soon as I learn more code!</p>
+            <p>You reached the end of the book! Click the pages again to close it.</p>
             <p style="text-align: center; font-size: 2rem; margin-top: 50px;">🖋️</p>
         </div>
 
-        <div class="page p2">
+        <div class="page p2" onclick="flipPage(this)">
             <h2>Chapter One</h2>
-            <p>I decided to build a website for my dad. It started with a simple background, but then I added a scrapbook, and even a flipping book!</p>
-            <p>Type your own stories right here in the code.</p>
+            <p>I decided to build a website for my dad. It started with a simple background, but then it grew into a full scrapbook.</p>
+            <p>Click me to see the final page!</p>
+            <div class="hint">Click to flip</div>
         </div>
 
-        <div class="page p1">
+        <div class="page p1" onclick="flipPage(this)">
             <h2>My Stories</h2>
-            <p>Welcome to my book. Hover over this page to flip it and read the next one!</p>
+            <p>Welcome to my book. This time, you have to actually <b>click</b> to turn the pages.</p>
             <p style="text-align: center; margin-top: 150px; font-size: 3rem;">📖</p>
+            <div class="hint">Click to open</div>
         </div>
     </div>
+
+    <script>
+        function flipPage(element) {
+            // This toggles the 'flipped' class on and off
+            element.classList.toggle('flipped');
+        }
+    </script>
 
 </body>
 </html>
