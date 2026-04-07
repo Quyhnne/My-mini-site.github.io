@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Story Book</title>
+    <style>
+        body {
+            margin: 0; display: flex; justify-content: center;
+            align-items: center; height: 100vh;
+            background: #2c3e50; font-family: 'Georgia', serif;
+        }
+
+        .book {
+            position: relative; width: 300px; height: 450px;
+            perspective: 1500px;
+        }
+
+        /* THE PAGE ANIMATION */
+        .page {
+            position: absolute; width: 100%; height: 100%;
+            padding: 25px; box-sizing: border-box;
+            background: #fdf6e3; border: 1px solid #d4a373;
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.1), 0 10px 20px rgba(0,0,0,0.4);
+            transform-origin: left;
+            transition: transform 1s ease-in-out;
+            cursor: pointer;
+            backface-visibility: hidden;
+        }
+
+        /* Hover to flip a page */
+        .page:hover { transform: rotateY(-160deg); }
+
+        .p1 { z-index: 3; }
+        .p2 { z-index: 2; }
+        .p3 { z-index: 1; background: #eee; } /* The back cover */
+
+        h2 { color: #5d4037; border-bottom: 1px solid #d4a373; margin-top: 0; }
+        p { color: #3e2723; line-height: 1.6; font-size: 0.95rem; }
+
+        .back-btn {
+            position: fixed; top: 20px; left: 20px;
+            padding: 10px 20px; background: white;
+            color: #333; text-decoration: none; border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-btn">← Back to Home</a>
+
+    <div class="book">
+        <div class="page p3">
+            <h2>The End</h2>
+            <p>More stories coming soon as I learn more code!</p>
+            <p style="text-align: center; font-size: 2rem; margin-top: 50px;">🖋️</p>
+        </div>
+
+        <div class="page p2">
+            <h2>Chapter One</h2>
+            <p>I decided to build a website for my dad. It started with a simple background, but then I added a scrapbook, and even a flipping book!</p>
+            <p>Type your own stories right here in the code.</p>
+        </div>
+
+        <div class="page p1">
+            <h2>My Stories</h2>
+            <p>Welcome to my book. Hover over this page to flip it and read the next one!</p>
+            <p style="text-align: center; margin-top: 150px; font-size: 3rem;">📖</p>
+        </div>
+    </div>
+
+</body>
+</html>
