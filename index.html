@@ -1,186 +1,164 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Random Stuff</title>
+    <title>My Digital Scrapbook</title>
     <style>
+        /* 1. BACKGROUND & OVERALL STYLE */
         body { 
             margin: 0; 
-            font-family: sans-serif; 
-            text-align: center; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
             background-image: url('https://i.pinimg.com/736x/26/20/63/262063227ca7b46833f0c6dd34b7eadc.jpg');
             background-attachment: fixed;
             background-size: cover;
             background-position: center;
+            overflow-x: hidden; /* Prevents side-scrolling */
         }
 
-        .overlap {
-            background: rgba(255, 255, 255, 0.85); 
-            padding: 30px;
-            border-radius: 20px;
-            display: inline-block;
-            margin-top: 15vh; 
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            max-width: 80%;
-        }
-
-        h1 { color: #333; margin-bottom: 10px; }
-        p { color: #555; font-size: 1.1rem; }
-
-        .contact-btn {
-            display: inline-block; 
-            background: #007bff; 
-            color: white; 
-            padding: 12px 25px; 
-            border-radius: 50px; 
-            text-decoration: none; 
-            margin-top: 20px;
-            transition: 0.3s;
-        }
-
-        /* --- NEW SCROLL STYLES (Now inside the style tag!) --- */
-        .section {
-            padding: 60px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .card {
+        /* 2. THE INTRO HEADER */
+        .header-box {
             background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 15px;
-            max-width: 400px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 40px;
+            margin: 10vh auto 100px auto;
+            max-width: 600px;
+            border-radius: 2px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+            border-left: 10px solid #ffcc00; 
+            text-align: center;
         }
 
-        .scroll-img {
-            width: 300px;
-            border-radius: 10px;
-            border: 5px solid white;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="overlap">
-        <h1>Yaay! You found my Website</h1>
-        <p>Here i just post random stuff because i cant think of anything in specific</p>
-        <p>😊Enjoy!😊</p>
-        <a href="mailto:yourname@email.com" class="contact-btn">Contact Me</a>
-    </div>
-
-    <div class="section">
-        <div class="card">
-            <h2>My First Idea</h2>
-            <p>This is where I'll put my first pin design. I'm thinking of something retro!</p>
-            <img src="https://via.placeholder.com/300" class="scroll-img">
-        </div>
-
-        <div class="card">
-            <h2>The Next Project</h2>
-            <p>Still thinking of what to put here... maybe a cat? Everyone loves cats.</p>
-            <img src="https://via.placeholder.com/300" class="scroll-img">
-        </div>
-        
-        <div style="height: 100px;"></div> </div>
-
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>My Random Stuff & Doodles</title>
-    <style>
-        body { 
-            margin: 0; 
-            font-family: sans-serif; 
-            text-align: center; 
-            background-image: url('https://i.pinimg.com/736x/26/20/63/262063227ca7b46833f0c6dd34b7eadc.jpg');
-            background-attachment: fixed;
-            background-size: cover;
-            background-position: center;
-        }
-
-        /* The Welcome Card */
-        .overlap {
-            background: rgba(255, 255, 255, 0.85); 
-            padding: 30px;
-            border-radius: 20px;
-            display: inline-block;
-            margin: 15vh 0 50px 0; 
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            max-width: 80%;
-        }
-
-        /* --- THE PHOTO GALLERY --- */
-        .gallery {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 40px; /* Space between the big photos */
-            padding: 20px;
-        }
-
-        .portfolio-pic {
-            width: 90%; /* Scale to the screen */
-            max-width: 1200px; /* But don't let it get crazy big on monitors */
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border: 8px solid white;
-            transition: transform 0.3s;
-        }
-        .portfolio-pic:hover { transform: scale(1.02); }
-
-        /* --- THE DOODLE SECTION --- */
-        .doodle-section {
-            background: rgba(255, 255, 255, 0.9);
-            margin-top: 100px;
-            padding: 50px 20px;
-            border-top: 5px dashed #ccc;
-        }
-        .doodle-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            max-width: 1000px;
+        /* 3. SCRAPBOOK ENTRIES */
+        .scrapbook-container {
+            max-width: 1100px;
             margin: 0 auto;
+            padding: 20px;
         }
-        .doodle-img {
-            width: 100%;
-            height: auto;
-            filter: grayscale(20%);
+
+        .entry {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 120px;
+            gap: 50px;
         }
+
+        /* This makes every second entry flip (Z-Pattern) */
+        .entry:nth-child(even) { flex-direction: row-reverse; }
+
+        /* The Photo Frame */
+        .photo-frame {
+            flex: 1;
+            background: white;
+            padding: 15px 15px 45px 15px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            transform: rotate(-2deg);
+            max-width: 500px;
+        }
+        .entry:nth-child(even) .photo-frame { transform: rotate(2deg); }
         
+        .photo-frame img {
+            width: 100%;
+            display: block;
+            border: 1px solid #ddd;
+        }
+
+        /* The Note next to the photo */
+        .note {
+            flex: 1;
+            background: #fff8bc; 
+            padding: 30px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+            font-style: italic;
+            color: #333;
+            max-width: 400px;
+            border-radius: 0 0 40px 0;
+            line-height: 1.6;
+        }
+
+        /* 4. DOODLE BIN AT THE BOTTOM */
+        .doodle-bin {
+            background: white;
+            padding: 80px 20px;
+            margin-top: 100px;
+            border-top: 8px dotted #999;
+            text-align: center;
+        }
+
+        .doodle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+        .doodle-grid img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
         .contact-btn {
             display: inline-block; background: #007bff; color: white; padding: 12px 25px; 
-            border-radius: 50px; text-decoration: none; margin-top: 20px;
+            border-radius: 5px; text-decoration: none; margin-top: 20px;
+        }
+
+        /* Mobile Friendly adjustment */
+        @media (max-width: 768px) {
+            .entry, .entry:nth-child(even) { flex-direction: column; }
+            .photo-frame, .note { max-width: 90%; }
         }
     </style>
 </head>
 <body>
 
-    <div class="overlap">
+    <div class="header-box">
         <h1>Yaay! You found my Website</h1>
-        <p>Scroll down to see my 1920px collection and some doodles!</p>
+        <p>A scrapbook of my 15 favorite designs and some random doodles.</p>
         <a href="mailto:yourname@email.com" class="contact-btn">Contact Me</a>
     </div>
 
-    <div class="gallery">
-        <img src="LINK_TO_PIC_1.jpg" class="portfolio-pic">
-        <img src="LINK_TO_PIC_2.jpg" class="portfolio-pic">
-        <img src="LINK_TO_PIC_3.jpg" class="portfolio-pic">
+    <div class="scrapbook-container">
+        
+        <div class="entry">
+            <div class="photo-frame">
+                <img src="YOUR_IMAGE_1.jpg">
+            </div>
+            <div class="note">
+                <h3>Design #1</h3>
+                <p>Add your story about this image here. This side-space is perfect for describing your pin ideas!</p>
+            </div>
         </div>
 
-    <div class="doodle-section">
-        <h2 style="font-family: 'Comic Sans MS', cursive;">The Doodle Bin</h2>
-        <p>Just some random sketches...</p>
-        <div class="doodle-container">
-            <img src="DOODLE_1.png" class="doodle-img">
-            <img src="DOODLE_2.png" class="doodle-img">
-            <img src="DOODLE_3.png" class="doodle-img">
+        <div class="entry">
+            <div class="photo-frame">
+                <img src="YOUR_IMAGE_2.jpg">
+            </div>
+            <div class="note">
+                <h3>Design #2</h3>
+                <p>This entry will automatically flip to the other side to keep the scrapbook look.</p>
+            </div>
         </div>
-        <p style="margin-top:50px; font-size: 0.8rem;">© 2026 - Made for my Dad's landing</p>
+
+        <div class="entry">
+            <div class="photo-frame">
+                <img src="YOUR_IMAGE_3.jpg">
+            </div>
+            <div class="note">
+                <h3>Design #3</h3>
+                <p>Just keep copying these "entry" blocks until you have all 15!</p>
+            </div>
+        </div>
+
+        </div>
+
+    <div class="doodle-bin">
+        <h2 style="font-family: 'Comic Sans MS', cursive;">The Doodle Bin</h2>
+        <p>A little messy, but that's the point.</p>
+        <div class="doodle-grid">
+            <img src="DOODLE_1.png">
+            <img src="DOODLE_2.png">
+            <img src="DOODLE_3.png">
+        </div>
+        <p style="margin-top:50px; font-size: 0.8rem; color: #999;">Made for Dad's Arrival • 2026</p>
     </div>
 
 </body>
