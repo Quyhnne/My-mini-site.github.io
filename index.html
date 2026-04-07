@@ -14,7 +14,7 @@
             background-size: cover;
             background-position: center;
             padding-top: 80px;
-            overflow-x: hidden; /* Keeps the runner from breaking the page width */
+            overflow-x: hidden;
         }
 
         /* 2. NAVIGATION */
@@ -33,31 +33,39 @@
         }
         .nav-menu a:hover { color: #007bff; }
 
-        /* 3. THE RUNNING ANIMATION */
+        /* 3. OC RUNNER ANIMATION (Viyaura Style) */
         #runner {
-            width: 50px; height: 50px;
-            position: absolute; top: -40px; 
+            width: 80px; height: 80px;
+            position: absolute; top: -60px; 
             animation: runAcross 8s linear infinite;
         }
+        .limbs { stroke: black; stroke-width: 3; stroke-linecap: round; fill: none; }
+        .hair { fill: black; stroke: black; stroke-width: 1; }
+
+        #hair { animation: hairBounce 0.3s infinite alternate; transform-origin: 50px 20px; }
+        @keyframes hairBounce {
+            0% { transform: rotate(-5deg); }
+            100% { transform: rotate(15deg); }
+        }
+
+        #leftArm { animation: swing 0.3s infinite alternate; }
+        #rightArm { animation: swing 0.3s infinite alternate-reverse; }
+        @keyframes swing { 0% { y2: 45; } 100% { y2: 25; } }
+
         @keyframes runAcross {
             0% { left: -10%; transform: scaleX(1); }
             50% { left: 110%; transform: scaleX(1); }
-            51% { transform: scaleX(-1); } /* Turn around */
+            51% { transform: scaleX(-1); }
             100% { left: -10%; transform: scaleX(-1); }
         }
-        /* Moving arms/legs */
-        .limbs { stroke: black; stroke-width: 3; stroke-linecap: round; }
-        #leftArm { animation: swing 0.3s infinite alternate; }
-        #rightArm { animation: swing 0.3s infinite alternate-reverse; }
-        @keyframes swing { 0% { y2: 40; } 100% { y2: 20; } }
 
-        /* 4. CONTENT BOXES */
+        /* 4. LAYOUT COMPONENTS */
         .header-box {
             background: rgba(255, 255, 255, 0.9);
-            padding: 40px; margin: 50px auto;
+            padding: 40px; margin: 60px auto;
             max-width: 600px; box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
             border-left: 10px solid #ffcc00; text-align: center;
-            position: relative; /* Needed for the runner to stay near the box */
+            position: relative;
         }
 
         .scrapbook-container { max-width: 1000px; margin: 0 auto; padding: 20px; }
@@ -65,7 +73,7 @@
         .entry:nth-child(even) { flex-direction: row-reverse; }
 
         .photo-frame {
-            flex: 1; background: white; padding: 15px 15px 40px 15px; 
+            flex: 1; background: white; padding: 15px 15px 45px 15px; 
             box-shadow: 0 10px 20px rgba(0,0,0,0.3); transform: rotate(-1.5deg);
         }
         .photo-frame img { width: 100%; display: block; border: 1px solid #eee; }
@@ -101,12 +109,15 @@
 
     <div class="header-box" id="home">
         <svg id="runner" viewBox="0 0 100 100">
-            <circle cx="50" cy="20" r="8" fill="none" stroke="black" stroke-width="3"/>
-            <line x1="50" y1="28" x2="50" y2="50" class="limbs"/>
+            <path id="hair" d="M45,12 Q30,15 25,35 Q35,30 45,20" class="hair" />
+            <circle cx="50" cy="20" r="9" fill="white" stroke="black" stroke-width="2"/>
+            <circle cx="53" cy="18" r="1" fill="black"/>
+            <circle cx="47" cy="18" r="1" fill="black"/>
+            <line x1="50" y1="29" x2="50" y2="55" class="limbs" style="stroke-width: 5;"/>
             <line id="leftArm" x1="50" y1="35" x2="30" y2="45" class="limbs"/>
             <line id="rightArm" x1="50" y1="35" x2="70" y2="45" class="limbs"/>
-            <line x1="50" y1="50" x2="35" y2="75" class="limbs"/>
-            <line x1="50" y1="50" x2="65" y2="75" class="limbs"/>
+            <line x1="50" y1="55" x2="35" y2="80" class="limbs"/>
+            <line x1="50" y1="55" x2="65" y2="80" class="limbs"/>
         </svg>
 
         <h1>Yaay! You found my Website</h1>
@@ -115,8 +126,12 @@
 
     <div class="scrapbook-container" id="gallery">
         <div class="entry">
-            <div class="photo-frame"><img src="IMAGE_URL_1.jpg"></div>
-            <div class="note"><h3>Design #1</h3><p>Your thoughts here...</p></div>
+            <div class="photo-frame"><img src="IMAGE_1.jpg"></div>
+            <div class="note"><h3>Design #1</h3><p>Write your thoughts here!</p></div>
+        </div>
+        <div class="entry">
+            <div class="photo-frame"><img src="IMAGE_2.jpg"></div>
+            <div class="note"><h3>Design #2</h3><p>Another description goes here.</p></div>
         </div>
         </div>
 
