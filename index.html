@@ -33,7 +33,7 @@
         }
         .nav-menu a:hover { color: #007bff; }
 
-        /* 3. OC RUNNER ANIMATION (Viyaura Style) */
+        /* 3. OC RUNNER ANIMATION */
         #runner {
             width: 80px; height: 80px;
             position: absolute; top: -60px; 
@@ -50,7 +50,14 @@
 
         #leftArm { animation: swing 0.3s infinite alternate; }
         #rightArm { animation: swing 0.3s infinite alternate-reverse; }
-        #body { backflip: 0.3s infinite alternate reverse; }
+        
+        /* Fixed: Replaced 'backflip' with a subtle body bounce */
+        #runner-body { animation: bodyBounce 0.3s infinite alternate; }
+        @keyframes bodyBounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(2px); }
+        }
+
         @keyframes swing { 0% { y2: 45; } 100% { y2: 25; } }
 
         @keyframes runAcross {
@@ -105,20 +112,22 @@
         <a href="#gallery">Scrapbook</a>
         <a href="#doodles">Doodles</a>
         <a href="stories.html" style="color: #d4a373;">My Stories 📖</a>
-        <a href="mailto:yourname@email.com">commit</a>
+        <a href="mailto:yourname@email.com">Commit</a>
     </nav>
 
     <div class="header-box" id="home">
         <svg id="runner" viewBox="0 0 100 100">
             <path id="hair" d="M45,12 Q30,15 25,35 Q35,30 45,20" class="hair" />
-            <circle cx="50" cy="20" r="9" fill="white" stroke="black" stroke-width="2"/>
-            <circle cx="53" cy="18" r="1" fill="black"/>
-            <circle cx="47" cy="18" r="1" fill="black"/>
-            <line x1="50" y1="29" x2="50" y2="55" class="limbs" style="stroke-width: 5;"/>
-            <line id="leftArm" x1="50" y1="35" x2="30" y2="45" class="limbs"/>
-            <line id="rightArm" x1="50" y1="35" x2="70" y2="45" class="limbs"/>
-            <line x1="50" y1="55" x2="35" y2="80" class="limbs"/>
-            <line x1="50" y1="55" x2="65" y2="80" class="limbs"/>
+            <g id="runner-body">
+                <circle cx="50" cy="20" r="9" fill="white" stroke="black" stroke-width="2"/>
+                <circle cx="53" cy="18" r="1" fill="black"/>
+                <circle cx="47" cy="18" r="1" fill="black"/>
+                <line x1="50" y1="29" x2="50" y2="55" class="limbs" style="stroke-width: 5;"/>
+                <line id="leftArm" x1="50" y1="35" x2="30" y2="45" class="limbs"/>
+                <line id="rightArm" x1="50" y1="35" x2="70" y2="45" class="limbs"/>
+                <line x1="50" y1="55" x2="35" y2="80" class="limbs"/>
+                <line x1="50" y1="55" x2="65" y2="80" class="limbs"/>
+            </g>
         </svg>
 
         <h1>Yaay! You found my Website</h1>
@@ -130,16 +139,17 @@
             <div class="photo-frame"><img src="https://i.pinimg.com/736x/e2/20/f1/e220f19ea62f4aa9960eac4fc2b119e1.jpg"></div>
             <div class="note"><h3>Thing #1</h3><p>Another one of my favourite pins😊</p></div>
         </div>
+
         <div class="entry">
             <div class="photo-frame"><img src="https://i.pinimg.com/736x/ae/15/27/ae15271468e04ee008d89977834d522a.jpg"></div>
             <div class="note"><h3>Thing #2</h3><p>Hey guys this was actually my first post on pinterest.</p></div>
         </div>
+
         <div class="entry">
-            <div class="photo-frame"><img src="<div class="entry">
             <div class="photo-frame"><img src="https://i.pinimg.com/736x/29/c2/dd/29c2dd56d450f1e196ae53b82c478f27.jpg"></div>
             <div class="note"><h3>Thing #3</h3><p>I just really like chess and cant help it.</p></div>
-   
         </div>
+    </div>
 
     <div class="doodle-bin" id="doodles">
         <h2>The Doodle Bin</h2>
