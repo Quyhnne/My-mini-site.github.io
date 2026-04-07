@@ -24,19 +24,22 @@
             transform-origin: left;
             transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
             cursor: pointer;
-            backface-visibility: hidden; /* Hides the "back" of the page until flipped */
+            backface-visibility: hidden;
             user-select: none;
         }
 
-        /* This is the magic class that JavaScript will toggle */
+        /* The Flipping Logic */
         .page.flipped {
             transform: rotateY(-160deg);
         }
 
-        /* Stacking order */
-        .p1 { z-index: 3; }
-        .p2 { z-index: 2; }
-        .p3 { z-index: 1; cursor: default; } /* Back cover doesn't flip */
+        /* STACKING ORDER (Z-INDEX) */
+        /* Higher numbers stay on top */
+        .p1 { z-index: 5; } 
+        .p2 { z-index: 4; }
+        .p3 { z-index: 3; }
+        .p4 { z-index: 2; }
+        .p5 { z-index: 1; cursor: default; }
 
         h2 { color: #5d4037; border-bottom: 1px solid #d4a373; margin-top: 0; pointer-events: none; }
         p { color: #3e2723; line-height: 1.6; font-size: 0.95rem; pointer-events: none; }
@@ -46,6 +49,8 @@
             padding: 10px 20px; background: white;
             color: #333; text-decoration: none; border-radius: 5px;
             z-index: 1001;
+            font-family: sans-serif;
+            font-weight: bold;
         }
         
         .hint {
@@ -58,45 +63,45 @@
 
     <a href="index.html" class="back-btn">← Back to Home</a>
 
-      <div class="book">
+    <div class="book">
+        
         <div class="page p5">
             <h2>The End</h2>
-            <p>thanks for reading♥.See you soon.</p>
+            <p>thanks for reading♥. See you soon.</p>
             <p style="text-align: center; font-size: 2rem; margin-top: 50px;">🖋️</p>
         </div>
 
-      <div class="book">
-        <div class="page p4">
+        <div class="page p4" onclick="flipPage(this)">
             <h2>Chapter 3</h2>
-            <p>Yeah i know its not pefect but im still learning.</p>
-            <p style="text-align: center; font-size: 2rem; margin-top: 50px;">🖋️</p>
+            <p>Yeah i know its not perfect but im still learning.</p>
+            <div class="hint">Click to flip</div>
         </div>
 
-    <div class="book">
-        <div class="page p3">
+        <div class="page p3" onclick="flipPage(this)">
             <h2>Chapter 2</h2>
-            <p>Unlike my sisters i decided to chllenge myself and learn a digital skill**this one btw♥**.</p>
-            <p style="text-align: center; font-size: 2rem; margin-top: 50px;">🖋️</p>
+            <p>Unlike my sisters i decided to challenge myself and learn a digital skill **this one btw♥**.</p>
+            <div class="hint">Click to flip</div>
         </div>
 
         <div class="page p2" onclick="flipPage(this)">
             <h2>Chapter One</h2>
-            <p> exactly 3 months ago my dad challenged me to learn a whole new skill,guess what this is my little corner in the www.</p>
-            <p>Sorry its the excitement!</p>
+            <p>Exactly 3 months ago my dad challenged me to learn a whole new skill. Guess what? This is my little corner in the www.</p>
+            <p>Sorry, it's the excitement!</p>
             <div class="hint">Click to flip</div>
         </div>
 
         <div class="page p1" onclick="flipPage(this)">
             <h2>Hi Loves!♥</h2>
-            <p>Welcome to my journal book.I made thi for no particular reason in particular, <b>click</b> please enjoy♥.</p>
+            <p>Welcome to my journal book. I made this for no particular reason, <b>click</b> please enjoy♥.</p>
             <p style="text-align: center; margin-top: 150px; font-size: 3rem;">♥♥</p>
             <div class="hint">Click to open</div>
         </div>
+
     </div>
 
     <script>
         function flipPage(element) {
-            // This toggles the 'flipped' class on and off
+            // This is the magic part that makes the page swing
             element.classList.toggle('flipped');
         }
     </script>
