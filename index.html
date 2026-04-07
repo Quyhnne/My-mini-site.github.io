@@ -1,65 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Pin Portfolio</title>
+    <title>My Random Stuff</title>
     <style>
-        body { font-family: sans-serif; text-align: center; background: #f0f0f0; padding: 50px; }
-        h1 { color: #333; }
-        .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: inline-block; }
+        body { 
+            margin: 0; 
+            font-family: sans-serif; 
+            text-align: center; 
+            /* Your Wallpaper Background */
+            background-image: url('https://i.pinimg.com/736x/26/20/63/262063227ca7b46833f0c6dd34b7eadc.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* This creates that cool frosted glass box for your text */
+        .overlap {
+            background: rgba(255, 255, 255, 0.85); 
+            padding: 30px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 15vh; /* Pushes it down so it's not stuck at the top */
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            max-width: 80%;
+        }
+
+        h1 { color: #333; margin-bottom: 10px; }
+        p { color: #555; font-size: 1.1rem; }
+
+        .contact-btn {
+            display: inline-block; 
+            background: #007bff; 
+            color: white; 
+            padding: 12px 25px; 
+            border-radius: 50px; 
+            text-decoration: none; 
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+        .contact-btn:hover { background: #0056b3; }
     </style>
 </head>
 <body>
-    <div class="overlap banner">
+
+    <div class="overlap">
         <h1>Yaay! You found my Website</h1>
         <p>Here i just post random stuff because i cant think of anything in specific</p>
         <p>😊Enjoy!😊</p>
-    </div>
-</body>
-</html>
-<a href="mailto:yourname@email.com" style="display:inline-block; background:#007bff; color:white; padding:10px 20px; border-radius:5px; text-decoration:none; margin-top:10px;">Contact Me</a>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>My Pin Portfolio</title>
-    <style>
-        /* This removes the default white space at the edges */
-        body { margin: 0; font-family: sans-serif; text-align: center; background: #f0f0f0; }
-
-        /* The Banner Styling */
-        .banner {
-            width: 100%;
-            height: 250px; /* Adjust this height to your liking */
-            object-fit: cover; /* This makes it crop like a YT banner instead of stretching */
-            display: block;
-        }
-
-        .content { padding: 50px; }
-        .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: inline-block; }
-    </style>
-</head>
-<body>
-
-    <img src="https://i.pinimg.com/736x/26/20/63/262063227ca7b46833f0c6dd34b7eadc.jpg" class="banner" alt="Site Banner">
-
-    <div class="content">
-        <div class="card">
-            <h1>Welcome to My Project</h1>
-            <p>Check out my latest pin designs below!</p>
-        </div>
+        
+        <a href="mailto:yourname@email.com" class="contact-btn">Contact Me</a>
     </div>
 
 </body>
 </html>
-.overlap {
-    position: absolute; /* This lets it float over the banner */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* This perfectly centers it */
-    color: white; /* Make the text white so it stands out against the image */
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* This makes the text readable if the image is bright */
-}
-
-.banner {
-    position: relative; /* This acts as the "container" for the overlap */
-    height: 400px; /* Gives you plenty of room for text */
-}
