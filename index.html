@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>My Digital Scrapbook</title>
     <style>
+        /* 1. GLOBAL STYLES */
         html { scroll-behavior: smooth; }
         body { 
             margin: 0; 
@@ -12,10 +13,11 @@
             background-attachment: fixed;
             background-size: cover;
             background-position: center;
-            padding-top: 60px;
+            padding-top: 80px;
+            overflow-x: hidden; /* Keeps the runner from breaking the page width */
         }
 
-        /* NAVIGATION MENU */
+        /* 2. NAVIGATION */
         .nav-menu {
             position: fixed; top: 0; width: 100%;
             background: rgba(255, 255, 255, 0.9);
@@ -23,7 +25,6 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             text-align: center;
         }
-
         .nav-menu a {
             margin: 0 15px; text-decoration: none;
             color: #333; font-weight: bold;
@@ -32,11 +33,31 @@
         }
         .nav-menu a:hover { color: #007bff; }
 
+        /* 3. THE RUNNING ANIMATION */
+        #runner {
+            width: 50px; height: 50px;
+            position: absolute; top: -40px; 
+            animation: runAcross 8s linear infinite;
+        }
+        @keyframes runAcross {
+            0% { left: -10%; transform: scaleX(1); }
+            50% { left: 110%; transform: scaleX(1); }
+            51% { transform: scaleX(-1); } /* Turn around */
+            100% { left: -10%; transform: scaleX(-1); }
+        }
+        /* Moving arms/legs */
+        .limbs { stroke: black; stroke-width: 3; stroke-linecap: round; }
+        #leftArm { animation: swing 0.3s infinite alternate; }
+        #rightArm { animation: swing 0.3s infinite alternate-reverse; }
+        @keyframes swing { 0% { y2: 40; } 100% { y2: 20; } }
+
+        /* 4. CONTENT BOXES */
         .header-box {
             background: rgba(255, 255, 255, 0.9);
             padding: 40px; margin: 50px auto;
             max-width: 600px; box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
             border-left: 10px solid #ffcc00; text-align: center;
+            position: relative; /* Needed for the runner to stay near the box */
         }
 
         .scrapbook-container { max-width: 1000px; margin: 0 auto; padding: 20px; }
@@ -47,7 +68,7 @@
             flex: 1; background: white; padding: 15px 15px 40px 15px; 
             box-shadow: 0 10px 20px rgba(0,0,0,0.3); transform: rotate(-1.5deg);
         }
-        .photo-frame img { width: 100%; display: block; }
+        .photo-frame img { width: 100%; display: block; border: 1px solid #eee; }
 
         .note {
             flex: 1; background: #fff8bc; padding: 25px;
@@ -75,38 +96,27 @@
         <a href="#gallery">Scrapbook</a>
         <a href="#doodles">Doodles</a>
         <a href="stories.html" style="color: #d4a373;">My Stories 📖</a>
-        <a href="lilcutie:yourname@email.com">Email Me</a>
+        <a href="mailto:yourname@email.com">Email Me</a>
     </nav>
 
     <div class="header-box" id="home">
+        <svg id="runner" viewBox="0 0 100 100">
+            <circle cx="50" cy="20" r="8" fill="none" stroke="black" stroke-width="3"/>
+            <line x1="50" y1="28" x2="50" y2="50" class="limbs"/>
+            <line id="leftArm" x1="50" y1="35" x2="30" y2="45" class="limbs"/>
+            <line id="rightArm" x1="50" y1="35" x2="70" y2="45" class="limbs"/>
+            <line x1="50" y1="50" x2="35" y2="75" class="limbs"/>
+            <line x1="50" y1="50" x2="65" y2="75" class="limbs"/>
+        </svg>
+
         <h1>Yaay! You found my Website</h1>
-        <p>Check out my scrapbook below, or visit my <b>Stories</b> page for some reading!</p>
+        <p>I'm so excited you're here! Look around at my sketches and stories.</p>
     </div>
 
     <div class="scrapbook-container" id="gallery">
         <div class="entry">
             <div class="photo-frame"><img src="IMAGE_URL_1.jpg"></div>
-            <div class="note"><h3>Design #1</h3><p>Write your thoughts here...</p></div>
-        </div>
-
-         <div class="entry">
-            <div class="photo-frame"><img src="IMAGE_URL_2.jpg"></div>
-            <div class="note"><h3>Design #2</h3><p>Write how you feel bout this one...</p></div>
-        </div>
-
-         <div class="entry">
-            <div class="photo-frame"><img src="IMAGE_URL_3.jpg"></div>
-            <div class="note"><h3>Design #3</h3><p>What will you call it...</p></div>
-        </div>
-
-         <div class="entry">
-            <div class="photo-frame"><img src="IMAGE_URL_4.jpg"></div>
-            <div class="note"><h3>Design #4</h3><p>amazing masterpiece,gott name for it...</p></div>
-        </div>
-
-         <div class="entry">
-            <div class="photo-frame"><img src="IMAGE_URL_5.jpg"></div>
-            <div class="note"><h3>Design #5</h3><p>wanna explain this one?...</p></div>
+            <div class="note"><h3>Design #1</h3><p>Your thoughts here...</p></div>
         </div>
         </div>
 
@@ -117,6 +127,7 @@
             <img src="https://i.pinimg.com/736x/59/bf/56/59bf56f870b4a725644ecf69cf2271f1.jpg">
             <img src="https://i.pinimg.com/736x/7d/9a/95/7d9a9590833ca0846152c4b0255592c0.jpg">
         </div>
+        <p>© 2026 • Portfolio Project :)</p>
     </div>
 
 </body>
