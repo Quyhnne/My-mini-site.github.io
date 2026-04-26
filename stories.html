@@ -3,126 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Dartsie Storybook</title>
+    <title>Dartsie's Desk</title>
     <style>
-        /* =========================================
-           1. THE DASHBOARD (Change stuff here!)
-           ========================================= */
         :root {
-            --bg-color: #121214;       /* The Room/Table color */
-            --book-cover: #2c3e50;      /* The Cover color (Try #a570c4 for purple!) */
-            --page-color: #fdf6e3;      /* The Paper color */
-            --book-width: 500px;        /* How wide the book is */
-            --book-height: 650px;       /* How tall the book is */
-            --flip-speed: 1.2s;         /* How fast pages turn */
+            /* 1. CHANGE YOUR DESK BACKGROUND HERE */
+            --desk-bg: url('https://images.unsplash.com/photo-1516533075015-a3838414c3ca?q=80&w=2070&auto=format&fit=crop');
+            --book-cover: #2c3e50;
+            --paper-texture: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
         }
 
         body {
-            margin: 0; display: flex; justify-content: center;
-            align-items: center; height: 100vh;
-            background: var(--bg-color); 
+            margin: 0; padding: 0;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh;
+            background: var(--desk-bg) no-repeat center center fixed;
+            background-size: cover;
             font-family: 'Georgia', serif;
-            overflow: hidden;
         }
 
-        /* =========================================
-           2. THE BOOK STRUCTURE
-           ========================================= */
+        /* 2. THE BOOK CONTAINER (Flat on the desk) */
+        .book-container {
+            position: relative;
+            width: 900px; /* Double width of the original */
+            height: 600px;
+            perspective: 2000px;
+            transition: transform 1s ease;
+        }
+
+        /* The actual book structure */
         .book {
-            position: relative; 
-            width: var(--book-width);
-            height: var(--book-height);
-            perspective: 2500px; /* Higher = more dramatic 3D */
+            position: relative;
+            width: 50%; /* Starts as a closed book */
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+            left: 25%; /* Centers the closed book */
+        }
+
+        /* When the book opens, it shifts to allow room for both sides */
+        .book.open {
+            transform: translateX(0);
+            left: 0;
         }
 
         .page {
-            position: absolute; width: 100%; height: 100%;
-            padding: 50px; box-sizing: border-box;
-            background: var(--page-color); 
-            border: 1px solid rgba(0,0,0,0.1);
-            box-shadow: inset 3px 0 20px rgba(0,0,0,0.1);
+            position: absolute;
+            width: 100%; height: 100%;
+            top: 0; left: 0;
+            background: #fdf6e3;
+            box-sizing: border-box;
+            padding: 40px;
             transform-origin: left;
-            transition: transform var(--flip-speed) cubic-bezier(0.645, 0.045, 0.355, 1);
-            cursor: pointer;
+            transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
             backface-visibility: hidden;
-            user-select: none;
-            overflow: hidden;
-            border-radius: 0 5px 5px 0; /* Slight curve on page edges */
+            box-shadow: inset 3px 0 10px rgba(0,0,0,0.1);
+            cursor: pointer;
         }
 
-        /* The 'Swing' animation */
-        .page.flipped {
-            transform: rotateY(-175deg);
-            box-shadow: 15px 10px 30px rgba(0,0,0,0.5);
+        /* Texture overlay for all pages */
+        .page::after {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--paper-texture); opacity: 0.2; pointer-events: none;
         }
 
-        /* =========================================
-           3. COVER & TEXTURES
-           ========================================= */
-        .cover {
-            background-color: var(--book-cover) !important;
+        /* The Right Side (Always visible underneath) */
+        .page.right-side {
+            transform: rotateY(0deg);
+            z-index: 1;
+            cursor: default;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 5px 10px 20px rgba(0,0,0,0.3);
+        }
+
+        /* The Front Cover / Flipping Pages */
+        .page.front-cover {
+            background-color: var(--book-cover);
             color: white;
             z-index: 10;
-            display: flex; flex-direction: column;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .page.flipped {
+            transform: rotateY(-180deg);
+        }
+
+        /* 3. STYLING THE "FLAT" LOOK (The Spine) */
+        .page.flipped {
+            border-radius: 10px 0 0 10px; /* Rounds the other way when flipped */
+            box-shadow: -5px 10px 20px rgba(0,0,0,0.3);
+            background: #fdf6e3; /* Becomes paper color on the back */
+            color: #333;
+        }
+
+        /* Content inside the pages */
+        h2 { border-bottom: 1px solid #d4a373; padding-bottom: 10px; }
+        .line-rules {
+            height: 100%;
+            background-image: linear-gradient(#d4a373 1px, transparent 1px);
+            background-size: 100% 2.5rem; /* Makes it look like the lined paper in your photo */
+            line-height: 2.5rem;
+        }
+
+        .cover-title {
+            height: 100%; display: flex; flex-direction: column; 
             justify-content: center; align-items: center;
         }
-
-        /* TEXTURE OVERLAYS (Makes it look real!) */
-        .page::after {
-            content: ""; position: absolute; top: 0; left: 0; 
-            width: 100%; height: 100%; opacity: 0.2; pointer-events: none;
-            background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
-        }
-
-        .cover::after {
-            background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
-            opacity: 0.3;
-        }
-
-        /* THE IMAGE SLOT */
-        .cover-art {
-            width: 75%; height: 280px;
-            margin-bottom: 30px;
-            border: 8px solid rgba(255,255,255,0.1);
-            background: rgba(0,0,0,0.3);
-            background-size: cover;
-            background-position: center;
-            /* TIP: To add image: background-image: url('LINK'); */
-        }
-
-        /* STACKING ORDER (Don't touch unless adding pages) */
-        .p1 { z-index: 5; } .p2 { z-index: 4; }
-        .p3 { z-index: 3; } .p4 { z-index: 2; }
-
-        h1 { font-size: 3rem; margin: 0; letter-spacing: 2px; text-transform: uppercase; }
-        p { color: #3e2723; line-height: 1.8; font-size: 1.2rem; }
     </style>
 </head>
 <body>
 
-    <div class="book">
-        
-        <div class="page p4">
-            <h2 style="color: #5d4037;">The End</h2>
-            <p>Start writing your finale here...</p>
-        </div>
+    <div class="book-container">
+        <div class="book" id="myBook">
+            
+            <div class="page right-side">
+                <div class="line-rules">
+                    <h2>Monday 05</h2>
+                    <p>This is the right side of your flat-lay book.</p>
+                </div>
+            </div>
 
-        <div class="page p3" onclick="flipPage(this)">
-            <h2 style="color: #5d4037;">Chapter One</h2>
-            <p>Every great story starts with a single line of code...</p>
-        </div>
+            <div class="page front-cover" onclick="openBook(this)">
+                <div class="cover-title">
+                    <h1 style="font-size: 3rem; margin: 0;">DARTSIDE</h1>
+                    <p>2026 Journal</p>
+                    <small style="margin-top: 100px;">Click to Open</small>
+                </div>
+            </div>
 
-        <div class="page p1 cover" onclick="flipPage(this)">
-            <div class="cover-art"></div>
-            <h1>DARTSIDE</h1>
-            <p style="color: rgba(255,255,255,0.7); font-style: italic;">The Storybook</p>
         </div>
-
     </div>
 
     <script>
-        function flipPage(element) {
+        function openBook(element) {
+            const book = document.getElementById('myBook');
             element.classList.toggle('flipped');
+            book.classList.toggle('open');
+            
+            // If it's flipped, we change the content to look like the left page
+            if(element.classList.contains('flipped')) {
+                element.innerHTML = `
+                    <div class="line-rules">
+                        <h2>January</h2>
+                        <p>This is the left side now!</p>
+                    </div>
+                `;
+            } else {
+                // Returns to cover content if closed
+                element.innerHTML = `
+                    <div class="cover-title">
+                        <h1 style="font-size: 3rem; margin: 0;">DARTSIDE</h1>
+                        <p>2026 Journal</p>
+                        <small style="margin-top: 100px;">Click to Open</small>
+                    </div>
+                `;
+            }
         }
     </script>
 
