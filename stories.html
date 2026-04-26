@@ -2,106 +2,126 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>The Story Book</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Dartsie Storybook</title>
     <style>
+        /* =========================================
+           1. THE DASHBOARD (Change stuff here!)
+           ========================================= */
+        :root {
+            --bg-color: #121214;       /* The Room/Table color */
+            --book-cover: #2c3e50;      /* The Cover color (Try #a570c4 for purple!) */
+            --page-color: #fdf6e3;      /* The Paper color */
+            --book-width: 500px;        /* How wide the book is */
+            --book-height: 650px;       /* How tall the book is */
+            --flip-speed: 1.2s;         /* How fast pages turn */
+        }
+
         body {
             margin: 0; display: flex; justify-content: center;
             align-items: center; height: 100vh;
-            background: #2c3e50; font-family: 'Georgia', serif;
+            background: var(--bg-color); 
+            font-family: 'Georgia', serif;
             overflow: hidden;
         }
 
+        /* =========================================
+           2. THE BOOK STRUCTURE
+           ========================================= */
         .book {
-            position: relative; width: 300px; height: 450px;
-            perspective: 1500px;
+            position: relative; 
+            width: var(--book-width);
+            height: var(--book-height);
+            perspective: 2500px; /* Higher = more dramatic 3D */
         }
 
         .page {
             position: absolute; width: 100%; height: 100%;
-            padding: 30px; box-sizing: border-box;
-            background: #fdf6e3; border: 1px solid #d4a373;
-            box-shadow: inset 0 0 40px rgba(0,0,0,0.1), 0 10px 20px rgba(0,0,0,0.4);
+            padding: 50px; box-sizing: border-box;
+            background: var(--page-color); 
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: inset 3px 0 20px rgba(0,0,0,0.1);
             transform-origin: left;
-            transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+            transition: transform var(--flip-speed) cubic-bezier(0.645, 0.045, 0.355, 1);
             cursor: pointer;
             backface-visibility: hidden;
             user-select: none;
+            overflow: hidden;
+            border-radius: 0 5px 5px 0; /* Slight curve on page edges */
         }
 
-        /* The Flipping Logic */
+        /* The 'Swing' animation */
         .page.flipped {
-            transform: rotateY(-160deg);
+            transform: rotateY(-175deg);
+            box-shadow: 15px 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* STACKING ORDER (Z-INDEX) */
-        /* Higher numbers stay on top */
-        .p1 { z-index: 5; } 
-        .p2 { z-index: 4; }
-        .p3 { z-index: 3; }
-        .p4 { z-index: 2; }
-        .p5 { z-index: 1; cursor: default; }
-
-        h2 { color: #5d4037; border-bottom: 1px solid #d4a373; margin-top: 0; pointer-events: none; }
-        p { color: #3e2723; line-height: 1.6; font-size: 0.95rem; pointer-events: none; }
-
-        .back-btn {
-            position: fixed; top: 20px; left: 20px;
-            padding: 10px 20px; background: white;
-            color: #333; text-decoration: none; border-radius: 5px;
-            z-index: 1001;
-            font-family: sans-serif;
-            font-weight: bold;
+        /* =========================================
+           3. COVER & TEXTURES
+           ========================================= */
+        .cover {
+            background-color: var(--book-cover) !important;
+            color: white;
+            z-index: 10;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
         }
-        
-        .hint {
-            position: absolute; bottom: 20px; color: rgba(0,0,0,0.3);
-            font-size: 0.8rem; width: 100%; text-align: center;
+
+        /* TEXTURE OVERLAYS (Makes it look real!) */
+        .page::after {
+            content: ""; position: absolute; top: 0; left: 0; 
+            width: 100%; height: 100%; opacity: 0.2; pointer-events: none;
+            background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
         }
+
+        .cover::after {
+            background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+            opacity: 0.3;
+        }
+
+        /* THE IMAGE SLOT */
+        .cover-art {
+            width: 75%; height: 280px;
+            margin-bottom: 30px;
+            border: 8px solid rgba(255,255,255,0.1);
+            background: rgba(0,0,0,0.3);
+            background-size: cover;
+            background-position: center;
+            /* TIP: To add image: background-image: url('LINK'); */
+        }
+
+        /* STACKING ORDER (Don't touch unless adding pages) */
+        .p1 { z-index: 5; } .p2 { z-index: 4; }
+        .p3 { z-index: 3; } .p4 { z-index: 2; }
+
+        h1 { font-size: 3rem; margin: 0; letter-spacing: 2px; text-transform: uppercase; }
+        p { color: #3e2723; line-height: 1.8; font-size: 1.2rem; }
     </style>
 </head>
 <body>
 
-    <a href="index.html" class="back-btn">← Back to Home</a>
-
     <div class="book">
         
-        <div class="page p5">
-            <h2>The End</h2>
-            <p>thanks for reading♥. See you soon.</p>
-            <p style="text-align: center; font-size: 2rem; margin-top: 50px;">🖋️</p>
-        </div>
-
-        <div class="page p4" onclick="flipPage(this)">
-            <h2>Chapter 3</h2>
-            <p>Yeah i know its not perfect but im still learning.</p>
-            <div class="hint">Click to flip</div>
+        <div class="page p4">
+            <h2 style="color: #5d4037;">The End</h2>
+            <p>Start writing your finale here...</p>
         </div>
 
         <div class="page p3" onclick="flipPage(this)">
-            <h2>Chapter 2</h2>
-            <p>Unlike my sisters i decided to challenge myself and learn a digital skill **this one btw♥**.</p>
-            <div class="hint">Click to flip</div>
+            <h2 style="color: #5d4037;">Chapter One</h2>
+            <p>Every great story starts with a single line of code...</p>
         </div>
 
-        <div class="page p2" onclick="flipPage(this)">
-            <h2>Chapter One</h2>
-            <p>Exactly 3 months ago my dad challenged me to learn a whole new skill. Guess what? This is my little corner in the www.</p>
-            <p>Sorry, it's the excitement!</p>
-            <div class="hint">Click to flip</div>
-        </div>
-
-        <div class="page p1" onclick="flipPage(this)">
-            <h2>Hi Loves!♥</h2>
-            <p>Welcome to my reading section. <b>click</b> Here,youll be able to post your own stories pretty soon so pls stay in touch. I made this for no particular reason, <b>click</b> please enjoy♥.</p>
-            <p style="text-align: center; margin-top: 150px; font-size: 3rem;">♥♥</p>
-            <div class="hint">Click to open</div>
+        <div class="page p1 cover" onclick="flipPage(this)">
+            <div class="cover-art"></div>
+            <h1>DARTSIDE</h1>
+            <p style="color: rgba(255,255,255,0.7); font-style: italic;">The Storybook</p>
         </div>
 
     </div>
 
     <script>
         function flipPage(element) {
-            // This is the magic part that makes the page swing
             element.classList.toggle('flipped');
         }
     </script>
